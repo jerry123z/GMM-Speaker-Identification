@@ -1,0 +1,75 @@
+Secion 2.4
+
+Baseline: M=8, maxIter=20, speakers:32
+
+Accuracy is 1.0
+
+Varying maxIter:
+
+M=8, MaxIter=15, speakers=32
+Accuracy 1.0
+
+M=8, MaxIter=12, speakers=32
+Accuracy 1.0
+
+M=8, MaxIter=8, speakers=32
+Accuracy = 1.0
+
+M=8, MaxIter=2, speakers=32
+Accuracy = 1.0
+
+M=8, MaxIter=1, speakers =32
+Accuracy = 1.0
+
+Surprisingly, varing the number of iterations our gmm can make doesnt impact it's accuracy as the algorithm will converge quickly.
+Even with 1 iteration we have enough distribution components to have perfect accuracy.
+
+
+Varying M:
+M=6, maxIter=20, speakers:32
+Accuracy = 1.0
+
+M=4, maxIter=20, speakers:32
+Accuracy = 0.9375
+
+M=3, maxIter=20, speakers:32
+Accurancy is 0.90625
+
+M=2, maxIter=20, speakers:32
+Accuracy = 0.96875
+
+With M as well, even though we reduce the number of gmm components the accuracy is still very good as long as we give our model time to converge.
+But generally as we reduce the number of components our accuracy decreases.
+This is there are not enough components to capture all of the features in the cepstrum and GMMs start becoming less unique.
+
+
+Varying Speakers (also removing test cases for said speakers):
+M=8, maxIter=20, speakers:16
+Accuracy = 1.0
+
+M=8, maxIter=20, speakers:8
+Accuracy = 1.0
+
+M=8, maxIter=20, speakers:4
+Accuracy = 1.0
+
+M=8, maxIter=20, speakers:2
+Accuracy = 1.0
+
+Reducing the number of speakers has no impact on our accuracy.
+This makes sense, as if the model can differentiate between 32 speakers then it's able to differentiate between 2.
+
+Hypothetical Questions
+
+• How might you improve the classification accuracy of the Gaussian mixtures, without adding more
+training data?
+Seen above, the number of components our GMM has has the greatest impact on accuracy. so increasing the number of components would help.
+
+• When would your classifier decide that a given test utterance comes from none of the trained speaker
+models, and how would your classifier come to this decision?
+My classifier will pick one of the trained speakers even if the utterance comes from none of them.
+But to accomplish this I would give a bottom log likelyhood threshold for my classifier so 
+that if the threshold is not reached then it would suggest none of the trained speakers
+
+• Can you think of some alternative methods for doing speaker identification that don’t use Gaussian mixtures?
+We could use the fact that the frequency bands of speech sounds cluster. We could use the frequncy bands of differentiate between speakers using a SVM.
